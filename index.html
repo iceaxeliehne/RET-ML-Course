@@ -65,7 +65,7 @@
                     coffeeCountContainer.innerHTML = "You have had " + coffeeCount + " sips of coffee already.";
                     canCountCoffee = false;
                 }
-                if (!canCountCoffee && prediction[i].probability , 0.5) {
+                if (!canCountCoffee && prediction[i].probability < 0.5) {
                     canCountCofee = true;
                 }
             }
