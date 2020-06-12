@@ -12,7 +12,7 @@
     // the link to your model provided by Teachable Machine export panel
     const URL = "https://teachablemachine.withgoogle.com/models/uo5yxAwzE/";
 
-    let model, webcam, labelContainer, maxPredictions, coffeeCount, coffeeCountContainer;
+    let model, webcam, labelContainer, maxPredictions, coffeeCount, coffeeCountContainer, canCountCoffee;
 
     // Load the image model and setup the webcam
     async function init() {
@@ -20,6 +20,7 @@
         const metadataURL = URL + "metadata.json";
         
         coffeeCount = 0;
+        canCountCoffee = true;
         coffeeCountContainer = document.getElementById("CoffeeCounter");
         
         // load the model and metadata
@@ -58,9 +59,15 @@
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
-            if (prediction[i].className == "coffee" &&  prediction[i].probability > 0.9) {
-                coffeeCount += 1;
-                coffeeCountContainer.innerHTML = "You have had " + coffeeCount + " sips of coffee already.";
+            if (prediction[i].className == "coffee") { 
+                if (canCountCoffee && prediction[i].probability > 0.9) {
+                    coffeeCount += 1;
+                    coffeeCountContainer.innerHTML = "You have had " + coffeeCount + " sips of coffee already.";
+                    canCountCoffee = false;
+                }
+                if (!canCountCoffee && prediction[i].probability , 0.5) {
+                    canCountCofee = true;
+                }
             }
         }
     }
