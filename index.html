@@ -62,11 +62,11 @@
             if (prediction[i].className == "coffee") { 
                 if (canCountCoffee && prediction[i].probability > 0.9) {
                     coffeeCount += 1;
-                    coffeeCountContainer.innerHTML = "You have had " + coffeeCount + " sips of coffee already.";
+                    coffeeCountContainer.innerHTML = "Hi, You have had " + coffeeCount + " sips of coffee already.";
                     canCountCoffee = false;
                 }
-                if (!canCountCoffee && prediction[i].probability < 0.5) {
-                    canCountCofee = true;
+                if (prediction[i].probability < 0.5) {
+                    canCountCoffee = true;
                 }
             }
         }
